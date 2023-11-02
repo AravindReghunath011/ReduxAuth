@@ -1,12 +1,18 @@
 import express from 'express'
-import multer from 'multer';
-import path from 'path';
+
 
 const router  = express.Router()
-import { authUser,
-    getUserProfile,
-    logoutUser,
-    registerUser,
-    updateUserProfile,
-    
- } from '../controllers/usersControllers.js';
+import { 
+    authAdmin,
+    getUsers,
+    editUser
+ } from '../controllers/adminController.js';
+
+
+
+router.post('/login',authAdmin)
+router.get('/getusers',getUsers)
+router.put('/edituser',editUser)
+
+
+export default router

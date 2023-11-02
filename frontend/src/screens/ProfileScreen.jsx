@@ -5,6 +5,7 @@ import { setCredentials } from '../slices/authSlice';
 import {toast} from 'react-toastify'
 import { useUserUpdateMutation } from '../slices/usersApiSlice';
 import axios from 'axios'
+import { userUpdate } from '../../../backend/api/api';
 
 
 
@@ -16,7 +17,9 @@ const ProfileScreen = () => {
   const [newPassword , setNewPassword] = useState('')
   const [confirmPassword , setConfirmPassword] = useState('')
   const [file , setFile] = useState('')
-  const [userUpdate,isLoading] = useUserUpdateMutation()
+  const navigate = useNavigate()
+  // const [userUpdate,isLoading] = useUserUpdateMutation()
+  
   
 
 
@@ -26,12 +29,14 @@ const ProfileScreen = () => {
 
   const dispatch = useDispatch()
   
-  
+  console.log(userInfo,'userInfo');
 
   useEffect(()=>{
     setName(userInfo.name)
     setEmail(userInfo.email)
   },[userInfo.name,userInfo.email])
+
+  console.log(name,email,'credentials');
 
   const submitHandler = async (e)=>{
     e.preventDefault();
@@ -52,11 +57,12 @@ const ProfileScreen = () => {
       formdata.append('email',email)
       formdata.append('newPassword',newPassword)
       try {
-        const res = await userUpdate(formdata).unwrap()
+        const res = await userUpdate(formdata)
         console.log(res,'after update');
         dispatch(setCredentials({...res}))
         toast.success('User Updated')
     } catch (err) {
+      setEmail(userInfo.email)
         toast.error('User already exist')
         console.log(err?.data?.message || err.error);
     }

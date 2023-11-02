@@ -4,6 +4,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { useRegisterMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import {toast} from 'react-toastify'
+import {register} from '../../../backend/api/api.js'
 
 
 const SingupScreen = () => {
@@ -13,6 +14,8 @@ const SingupScreen = () => {
   const [confirmPassword , setConfirmPassword] = useState('')
 
   // const [register,isLoading] = useRegisterMutation()
+  
+
 
 
   const navigate  = useNavigate()
@@ -29,19 +32,19 @@ const SingupScreen = () => {
       toast.error('passwords do not match')
     }else{
       try {
-        const res = await register({name,email,password}).unwrap()
+        const res = await register({name,email,password})
         console.log(res);
         dispatch(setCredentials({...res}))
         navigate('/')
     } catch (err) {
-        toast.error(err?.data?.message || err.error);
+        toast.error(err?.data?.message || err.message);
     }
 
     }
     
 }
   return (
-    <div className='flex justify-center items-center h-[80vh] bg-zinc-700'>
+    <div className='flex justify-center items-center h-[89.5vh] bg-zinc-700'>
       <form onSubmit={submitHandler}>
         <div className='h-[65vh] w-[35vw] rounded-lg bg-zinc-800 '>
             <div className='ml-36 pt-3'>

@@ -8,6 +8,7 @@ import userRoutes from './routes/userRoutes.js'
 import { errorHandler, notFound } from './middleware/errormiddleware.js'
 import cors from 'cors'
 import bodyParser from 'body-parser'
+import adminRoutes from './routes/adminRoutes.js'
 connectDB()
 
 const app = express()
@@ -20,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser())
 app.use('/api/users',userRoutes)
-// app.use('/api/admin',adminRoutes)
+app.use('/api/admin',adminRoutes)
 
 app.get('/',(req,res)=>console.log('server is ready'))
 

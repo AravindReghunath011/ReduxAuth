@@ -15,10 +15,12 @@ import SingupScreen from './screens/SingupScreen.jsx'
 import ProfileScreen from './screens/ProfileScreen.jsx'
 import PrivateRoute from './components/PrivateRoute.jsx'
 import ImageUpload from './components/ImageUpload.jsx'
+import UsersList from './screens/UsersList.jsx'
+import EditPofile from './screens/EditPofile.jsx'
 
  const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App/>}>
+    <Route  path='/' element={<App/>}>
       <Route index={true} path='/' element={<HomeScreen/>}/>
       <Route  path='/login' element={<LoginScreen/>}/>
       <Route  path='/upload' element={<ImageUpload/>}/>
@@ -27,9 +29,15 @@ import ImageUpload from './components/ImageUpload.jsx'
         <Route  path='/profile' element={<ProfileScreen/>}/>
       </Route>
   
+     
+     
+      <Route  path='/admin'  element={<HomeScreen isAdmin={true}/>}/>
+      <Route  path='/edituser'  element={<EditPofile/>}/>
+      <Route  path='/userslist'  element={<UsersList />}/>
+      <Route  path='/adminlogin'  element={<LoginScreen isAdmin={true}/>}/>
     </Route>
   
-
+  
   )
  )
 

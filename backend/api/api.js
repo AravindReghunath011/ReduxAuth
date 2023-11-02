@@ -19,10 +19,13 @@ export const login = async (data) => {
 // Register
 export const register = async (data) => {
   try {
+    console.log(data,'data');
     const response = await axios.post(`${USER_URL}`, data);
+    console.log(response.data,'response');
     return response.data;
   } catch (error) {
-    throw error;
+    throw new Error('User alredy exists')
+
   }
 };
 
@@ -39,9 +42,11 @@ export const logout = async () => {
 // Update User Profile
 export const userUpdate = async (data) => {
   try {
+    console.log(data,'data');
     const response = await axios.put(`${USER_URL}/profile`, data);
+    console.log(response.data,'response');
     return response.data;
   } catch (error) {
-    throw error;
+    throw new Error('Error occured')
   }
 };
