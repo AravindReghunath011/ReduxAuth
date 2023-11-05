@@ -1,4 +1,5 @@
 import express from 'express'
+import { adminAuth } from '../middleware/adminAuthMiddleware.js';
 
 
 const router  = express.Router()
@@ -11,8 +12,8 @@ import {
 
 
 router.post('/login',authAdmin)
-router.get('/getusers',getUsers)
-router.put('/edituser',editUser)
+router.get('/getusers',adminAuth,getUsers)
+router.put('/edituser',adminAuth,editUser)
 
 
 export default router

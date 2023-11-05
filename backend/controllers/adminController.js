@@ -39,7 +39,7 @@ const authAdmin = asyncHandler(async(req,res)=>{
 
 // @desc  getUSers admin/ get users
 // route  Get /api/admin/getusers
-// access Public
+// access Private
 const getUsers = asyncHandler(async(req,res)=>{
     try {
         const users = await User.find({})

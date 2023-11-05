@@ -6,6 +6,7 @@ import { Link,useNavigate } from 'react-router-dom'
 import { useLogoutMutation } from '../slices/usersApiSlice.js'
 import {logout} from '../slices/authSlice'
 import { useDispatch } from 'react-redux'
+import { logout as logoutApiCall } from '../../../backend/api/api.js'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -15,10 +16,13 @@ export default function Example() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {userInfo} = useSelector((state)=>state.auth)
-  const [logoutApiCall] = useLogoutMutation();
+  const {adminInfo} = useSelector((state)=>state.auth)
+  // const [logoutApiCall] = useLogoutMutation();
+  
+  
   const logoutHandler = async ()=>{
     try {
-      await logoutApiCall().unwrap()
+      await logoutApiCall()
       dispatch(logout())
       navigate('/')
     } catch (error) {
@@ -55,7 +59,7 @@ export default function Example() {
                     'block px-4 py-2 text-sm'
                   )}
                 >
-                  {userInfo.name}
+                  {userInfo ? userInfo.name : adminInfo.name  }
                   </Link>
               )}
             </Menu.Item>

@@ -12,14 +12,13 @@ import adminRoutes from './routes/adminRoutes.js'
 connectDB()
 
 const app = express()
+
+app.use(cookieParser())
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use('/images',express.static('backend/public/images'))
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cookieParser())
+
 app.use('/api/users',userRoutes)
 app.use('/api/admin',adminRoutes)
 

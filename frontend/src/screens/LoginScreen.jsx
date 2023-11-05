@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {Link,useNavigate} from 'react-router-dom'
 import { useDispatch,useSelector } from 'react-redux';
 import { useLoginMutation } from '../slices/usersApiSlice';
-import { setCredentials } from '../slices/authSlice';
+import { setCredentials,setAdminCredentials } from '../slices/authSlice';
 import {toast} from 'react-toastify';
 import { login } from '../../../backend/api/api.js';
 import {adminLogin } from '../../../backend/api/adminApi.js'
@@ -18,6 +18,7 @@ const LoginScreen = ({isAdmin}) => {
     // const [login,{isLoading}] = useLoginMutation();
 
     const {userInfo} = useSelector((state)=>state.auth)
+    const {adminInfo} = useSelector((state)=>state.auth)
 
     const submitHandler = async (e)=>{
         e.preventDefault();
@@ -31,8 +32,9 @@ const LoginScreen = ({isAdmin}) => {
             }else{
                 const res = await adminLogin({email,password})
             console.log('res from login admin',res);
-            dispatch(setCredentials({...res}))
-            toast.success('Login success')
+            dispatch(setAdminCredentials({...res}))
+            console.log('admincredentialls',adminInfo);
+            toast.success('Admin Login success')
             navigate('/admin')
             }
             
@@ -45,6 +47,9 @@ const LoginScreen = ({isAdmin}) => {
     useEffect(()=>{
         if(userInfo){
             navigate('/')
+        }
+        if(adminInfo){
+            navigate('/admin')
         }
     },[navigate,userInfo])
    

@@ -8,6 +8,7 @@ import ProfileImage from './Profile.jsx'
 
 const Header = () => {
   const {userInfo} = useSelector((state)=>state.auth)
+  const {adminInfo} = useSelector((state)=>state.auth)
 
 
   
@@ -15,9 +16,9 @@ const Header = () => {
     <>
       <div className='h-20 bg-zinc-800 pt-5 flex justify-between'>
         <div className='text-white ml-10 font-bold text-xl '>Mern Auth</div>
-        {userInfo ?<div className='flex text-white text-lg gap-5 pr-10 '>
+        {userInfo||adminInfo ?<div className='flex text-white text-lg gap-5 pr-10 '>
         
-        {userInfo?.profileImage ? <ProfileImage userInfo={userInfo}/> : ''}
+        {userInfo?.profileImage||adminInfo?.profileImage ? <ProfileImage userInfo={userInfo||adminInfo}/> : ''}
         <Dropdown/>
         
       </div>
