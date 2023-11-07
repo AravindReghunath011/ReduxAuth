@@ -24,15 +24,19 @@ const EditPofile = () => {
     e.preventDefault()
     const data = {
       email,
-      name
+      name,
+      userForEdit
     }
-    let updatedUser = editUser(data)
-    if(updatedUser){
-      navigate
+    editUser(data).then(()=>{
+      console.log('entered then');
       toast.success('User updated')
-    }else{
-      toast.error('Error occured')
-    }
+      navigate('/userslist')
+    }).catch((err)=>{
+      console.log('error edit');
+      toast.error(err.message)
+    })
+    
+    
    }
   return (
     <div className='flex justify-center items-center h-[89.5vh] bg-zinc-700'>

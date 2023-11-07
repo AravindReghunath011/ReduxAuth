@@ -17,7 +17,9 @@ export const HomeScreen = ({ isAdmin }) => {
           <Link to={'/login'}>
             <button className='bg-sky-500 text-white px-4 rounded-md py-1'>SignIn</button>
           </Link>
-          <button className='bg-gray-600 text-white px-4 rounded-md py-1'>Signup</button>
+          <Link to={'/register'}>
+            <button className='bg-gray-600 text-white px-4 rounded-md py-1'>Signup</button>
+          </Link>
         </div>
       )}
     </div>

@@ -62,8 +62,16 @@ const getUsers = asyncHandler(async(req,res)=>{
 const editUser = asyncHandler(async(req,res)=>{
     try {
         
-        const {name,email} = req.body
-        let user = await User.find({email})
+        const {name,email,userForEdit} = req.body
+        console.log('userForEdit from edit ',userForEdit);
+        let user = await User.find({email:userForEdit.email})
+        let existUser = await User.find({email})
+        console.log(existUser,'existuser');
+        console.log(user,'user');
+        if(existUser && existUser.email!=user.email){
+            res.status(400)
+            throw new Error('Email is used')
+        }else{
         if(user){
            user = await User.updateOne({email},{
                 name:name || user.name,
@@ -72,6 +80,7 @@ const editUser = asyncHandler(async(req,res)=>{
         }else{
             console.log('no user');
         }
+    }
         
        
         console.log(user,'updateduser');
@@ -81,7 +90,8 @@ const editUser = asyncHandler(async(req,res)=>{
             
         })
     } catch (error) {
-        console.log(error.message);
+        console.log(error.message,'from controller catch');
+        throw new Error (error.message)
     }   
 })
 

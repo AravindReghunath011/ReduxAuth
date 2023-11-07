@@ -17,6 +17,7 @@ import PrivateRoute from './components/PrivateRoute.jsx'
 import ImageUpload from './components/ImageUpload.jsx'
 import UsersList from './screens/UsersList.jsx'
 import EditPofile from './screens/EditPofile.jsx'
+import PrivateAdmin from './components/PrivateAdmin.jsx'
 
  const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,9 +32,11 @@ import EditPofile from './screens/EditPofile.jsx'
   
      
      
+      <Route path='' element={<PrivateAdmin/>}>
       <Route  path='/admin'  element={<HomeScreen isAdmin={true}/>}/>
       <Route  path='/edituser'  element={<EditPofile/>}/>
       <Route  path='/userslist'  element={<UsersList />}/>
+      </Route>
       <Route  path='/adminlogin'  element={<LoginScreen isAdmin={true}/>}/>
     </Route>
   

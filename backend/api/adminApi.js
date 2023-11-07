@@ -42,8 +42,10 @@ export const editUser = async (data) => {
     console.log(response.data,'response');
     return response.data;
   } catch (error) {
-    console.log('entered catch');
-    console.log(error.message);
+    throw new Error('Email already used')
+    
+    
+    
 
     
     
